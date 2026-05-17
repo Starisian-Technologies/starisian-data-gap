@@ -1,0 +1,15 @@
+# Default ownership
+* @starisian
+
+# Security and governance
+SECURITY.md @starisian
+.github/workflows/* @starisian
+
+# Plugin runtime
+wp-content/plugins/sparxstar-data-gap/sparxstar-data-gap.php @starisian
+wp-content/plugins/sparxstar-data-gap/assets/js/* @starisian
+wp-content/plugins/sparxstar-data-gap/assets/css/* @starisian
+
+# Release and dependency controls
+package.json @starisian
+package-lock.json @starisian

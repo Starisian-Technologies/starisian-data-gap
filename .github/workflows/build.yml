@@ -30,6 +30,9 @@ jobs:
       - name: Build (minify JS + CSS)
         run: npm run build
 
+      - name: Run PHPUnit tests
+        run: npm test
+
       - name: Verify build artefacts exist
         run: |
           test -f wp-content/plugins/sparxstar-data-gap/assets/js/neural-map.min.js

@@ -340,7 +340,6 @@ const familyColors={
   'japonic':    new THREE.Color(0xDC9020),
   'koreanic':   new THREE.Color(0xCA8018),
   // Middle East / Central Asia — warm orange
-  'afroasiatic':new THREE.Color(0x9E7DD8), // already defined, Semitic branch
   'semitic':    new THREE.Color(0x6B8FD4),
   'iranian':    new THREE.Color(0xB07018),
   'turkic':     new THREE.Color(0xAA6820),
@@ -543,87 +542,6 @@ LAND_RINGS.forEach(ring=>{
   globeGroup.add(line);
   embeddedLines.push(line);
 });
-
-// Async upgrade: fetch real Natural Earth GeoJSON country borders
-// When loaded, remove coarse rings and replace with accurate outlines
-(async()=>{
-  const urls = [
-    'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json',
-    'https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson'
-  ];
-  
-  for(const url of urls){
-    try{
-      const r = await fetch(url);
-      if(!r.ok) continue;
-      const data = await r.json();
-      
-      let features = [];
-      
-      // Handle TopoJSON (world-atlas)
-      if(data.objects && data.objects.countries){
-        const topo = data;
-        const {scale,translate} = topo.transform;
-        const arcs = topo.arcs;
-        
-        function decodeArc(idx){
-          const rev = idx<0;
-          const arc = arcs[rev?~idx:idx];
-          let x=0,y=0;
-          const pts = arc.map(([dx,dy])=>{x+=dx;y+=dy;
-            return [x*scale[0]+translate[0], y*scale[1]+translate[1]];});
-          return rev ? pts.slice().reverse() : pts;
-        }
-        function decodeRing(ringArcs){
-          let pts=[];
-          ringArcs.forEach(i=>{
-            const ap=decodeArc(i);
-            pts = pts.concat(pts.length ? ap.slice(1) : ap);
-          });
-          return pts;
-        }
-        topo.objects.countries.geometries.forEach(geom=>{
-          const polys = geom.type==='Polygon'?[geom.arcs]:
-                        geom.type==='MultiPolygon'?geom.arcs:[];
-          polys.forEach(poly=>{
-            features.push(poly[0] ? decodeRing(poly[0]) : null);
-          });
-        });
-        features = features.filter(Boolean);
-      }
-      // Handle plain GeoJSON
-      else if(data.features){
-        data.features.forEach(f=>{
-          const geom = f.geometry;
-          if(!geom) return;
-          const polys = geom.type==='Polygon'?[geom.coordinates]:
-                        geom.type==='MultiPolygon'?geom.coordinates:[];
-          polys.forEach(poly=>{ if(poly[0]) features.push(poly[0]); });
-        });
-      }
-      
-      if(features.length < 10) continue; // sanity check
-      
-      // Success — remove coarse rings, draw real borders
-      embeddedLines.forEach(l=>globeGroup.remove(l));
-      const realMat = new THREE.LineBasicMaterial({
-        color:0x4a9acc,transparent:true,opacity:0.65,depthWrite:false});
-      features.forEach(ring=>{
-        if(!ring||ring.length<3) return;
-        const pts = ring.map(([lng,lat])=>ll2xyz(lat,lng,GLOB_R*1.002));
-        pts.push(pts[0].clone());
-        globeGroup.add(new THREE.Line(
-          new THREE.BufferGeometry().setFromPoints(pts), realMat));
-      });
-      break; // stop trying urls
-    } catch(e){ /* try next url */ }
-  }
-})();
-
-
-
-
-
 
 // Atmosphere glow — removed per design (was causing bright edge artifact)
 
