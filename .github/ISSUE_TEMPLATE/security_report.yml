@@ -1,23 +1,12 @@
-name: Security report
-description: For potential vulnerabilities (prefer private advisory flow)
-title: "[Security]: "
-labels: ["security"]
+name: Security reporting instructions
+description: Do not use public issues for vulnerabilities; follow SECURITY.md for private reporting.
 body:
   - type: markdown
     attributes:
       value: |
-        Do not include exploit details in public issues.
-        Prefer private reporting through SECURITY.md.
-  - type: textarea
-    id: summary
-    attributes:
-      label: High-level summary
-      description: Briefly describe concern without exploit details.
-    validations:
-      required: true
-  - type: input
-    id: affected_version
-    attributes:
-      label: Affected version/tag
-    validations:
-      required: true
+        ## Private security reporting only
+
+        Do **not** use this public issue form to report suspected vulnerabilities.
+        Public issues can disclose that a security problem may exist, even without exploit details.
+
+        Please follow the private reporting process documented in `SECURITY.md`.
