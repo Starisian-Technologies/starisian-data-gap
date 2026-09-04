@@ -18,6 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: phpunit
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -37,7 +43,7 @@ jobs:
           tools: phpunit
 
       - name: Run PHPUnit tests
-        run: npm test
+        run: phpunit --configuration tests/php/phpunit.xml
 
       - name: Verify build artefacts exist
         run: |

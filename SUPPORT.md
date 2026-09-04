@@ -16,3 +16,7 @@ Provide:
 
 ## Security issues
 Security reports must follow `SECURITY.md` and stay private until a fix is available.
+
+## Private maintainer contact
+If private reporting is required (security fallback or conduct reports), contact:
+- support@starisian.com

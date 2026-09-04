@@ -4,7 +4,7 @@
 `.github/workflows/build.yml` validates:
 - dependency install (`npm ci`)
 - JS/CSS build (`npm run build`)
-- PHPUnit tests (`npm test`)
+- PHPUnit tests (`phpunit --configuration tests/php/phpunit.xml`)
 - PHP syntax lint for plugin bootstrap
 
 ## Release workflow
