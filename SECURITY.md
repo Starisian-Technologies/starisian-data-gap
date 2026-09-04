@@ -7,8 +7,7 @@ Only the latest tagged release is supported for security fixes.
 Do **not** open a public issue for vulnerabilities.
 
 Please report privately via:
-- GitHub Security Advisories for this repository (preferred), or
-- direct maintainer contact in `SUPPORT.md` if advisory access is unavailable.
+- GitHub Security Advisories for this repository.
 
 Include:
 - affected version/tag
