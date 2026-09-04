@@ -16,4 +16,5 @@ Contributors are expected to:
 Repository maintainers may remove comments, close threads, or block contributors for violations.
 
 ## Reporting
-Report conduct issues privately through maintainer channels listed in `SUPPORT.md`.
+Report conduct issues privately using the dedicated maintainer contact at **[INSERT PRIVATE CONDUCT CONTACT HERE]**.
+Do not file public issues, discussions, or pull requests for conduct reports.
