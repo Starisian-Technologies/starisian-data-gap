@@ -30,6 +30,12 @@ jobs:
       - name: Build (minify JS + CSS)
         run: npm run build
 
+      - name: Set up PHP with PHPUnit
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: phpunit
+
       - name: Run PHPUnit tests
         run: npm test
 
