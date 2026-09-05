@@ -14,7 +14,7 @@
   "devDependencies": {
     "cssnano": "^7.0.7",
     "esbuild": "^0.28.1",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.28",
     "postcss-cli": "^11.0.1",
     "three": "0.184.0"
   }
