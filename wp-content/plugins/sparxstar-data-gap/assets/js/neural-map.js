@@ -533,14 +533,12 @@ const LAND_RINGS = [
 ];
 // Render embedded land rings immediately — zero network dependency
 const landEdgeMat = new THREE.LineBasicMaterial({color:0x4a9acc,transparent:true,opacity:0.65,depthWrite:false});
-const embeddedLines = []; // track so we can remove them if real data loads
 LAND_RINGS.forEach(ring=>{
   const pts = ring.map(([lng,lat])=>ll2xyz(lat,lng,GLOB_R*1.002));
   pts.push(pts[0].clone());
   const geo = new THREE.BufferGeometry().setFromPoints(pts);
   const line = new THREE.Line(geo, landEdgeMat);
   globeGroup.add(line);
-  embeddedLines.push(line);
 });
 
 // Atmosphere glow — removed per design (was causing bright edge artifact)
