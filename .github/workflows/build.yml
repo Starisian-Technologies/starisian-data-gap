@@ -30,6 +30,15 @@ jobs:
       - name: Build (minify JS + CSS)
         run: npm run build
 
+      - name: Set up PHP with PHPUnit
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: phpunit
+
+      - name: Run PHPUnit tests
+        run: phpunit --configuration tests/php/phpunit.xml
+
       - name: Verify build artefacts exist
         run: |
           test -f wp-content/plugins/sparxstar-data-gap/assets/js/neural-map.min.js

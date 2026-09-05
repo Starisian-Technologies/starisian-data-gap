@@ -1,0 +1,22 @@
+name: Documentation issue
+description: Missing, incorrect, or stale docs
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Documentation location
+      description: File or URL
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Suggested correction
